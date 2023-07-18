@@ -1,1 +1,27 @@
-<h1>Calendars Page</h1>
+<style>
+.bord{
+  border-top: 4px solid #822019;
+  border-left: 6px solid #822019;
+  border-right: 6px solid #822019;
+  border-bottom: 4px solid #822019;
+  padding-left: 15px
+}
+</style>
+<h1 style='padding-top: 12px'>Yearly Calendars</h1>
+
+<div class='d-flex justify-content-center align-items-center' style='padding-top:15px; color: #822019'>
+  <div>
+    <div class='bord' style='padding-top: 12px; width: 400px; height: 200px; background-color: lightblue'>
+      <h2>2022</h2>
+      <h3>&nbsp<%= link_to "Calendar 2022", 'http://www.sun.ac.za/english/Documents/Yearbooks/Current/2023-FMHS-Calendar.pdf', style:'color: #822019; text-decoration: none' %></h3>
+    </div>
+    <div class='bord' style='padding-top: 12px; width: 400px; height: 200px; background-color: lightgreen'>
+      <h2>2023</h2>
+      <h3>&nbsp<%= link_to "Calendar 2023", 'https://www.sun.ac.za/english/Documents/Yearbooks/Current/2023-Science.pdf', style:'color: #822019; text-decoration: none' %></h3>
+    </div>
+    <div class='bord' style='padding-top: 12px; width: 400px; height: 200px; background-color: lightpink'>
+      <h2>2024</h2>
+      <h3>&nbsp<%= link_to "Calendar 2024", 'http://www.sun.ac.za/english/Documents/Yearbooks/Current/2023-Engineering.pdf', style:'color: #822019; text-decoration: none' %></h3>
+    </div>
+  </div>
+</div>

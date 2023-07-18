@@ -5,7 +5,7 @@
   <%= form_with model: @user, url: sign_up_path do |f| %>
     <div class='mb-4'>
       <%= f.label :email%>
-      <%= f.text_field :email, placeholder:'john@doe.com', class:'form-control' %>
+      <%= f.text_field :email, placeholder:'john@doe.com', class:'form-control', autocomplete: 'off' %>
     </div>
     <div class='mb-4'>
       <%= f.label :password%>
@@ -20,12 +20,7 @@
       <%= f.select(:role, options_for_select(['student','lecturer'])) %>
     </div>
     <div class='mb-4'>
-      <p><%= f.label :password_confirmation%></p>
-      <p><%= f.label :note_applying_for_residence_does_not_guarantee_a_position%></p>
-      <%= f.select(:residence, options_for_select(['none', 'House Novachrono', 'House Silva', 'House Vermillion'])) %>
-    </div>
-    <div class='mb-4'>
-      <%= f.submit 'Register', data:{turbo_confirm: 'Are you sure that these details are correct?', turbo_method: :post}, class:'btn btn-info'%>
+      <%= f.submit 'Sign Up', data:{turbo_confirm: 'Are you sure that these details are correct?', turbo_method: :post}, class:'btn btn-info'%>
     </div>
   <% end %>
   </div>

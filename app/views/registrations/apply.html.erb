@@ -1,1 +1,27 @@
 <h1>Apply to Study at VU</h1>
+<div class='d-flex justify-content-center'>
+  <div class='col-md-5'>
+  <h4 style='padding-top: 15px; padding-bottom:15px'>Your Personal Information</h4>
+  <%= form_with model: @user, url: sign_up_path do |f| %>
+    <div class='mb-4'>
+      <p><%= f.label :qualification%></p>
+      <p><%= f.label :note_applying_for_a_qualification_does_not_guarantee_a_position%></p>
+      <%= f.select(:qualification, options_for_select(['Civil', 'Electronic', 'Mechatronic', 'Mechanical'])) %>
+    </div>
+    <div class='mb-4'>
+      <p><%= f.label :residence%></p>
+      <p><%= f.label :note_applying_for_residence_does_not_guarantee_a_position%></p>
+      <%= f.select(:residence, options_for_select(['none', 'House Novachrono', 'House Silva', 'House Vermillion'])) %>      
+    </div>
+    <div class='mb-4'>
+      <p><%= f.label :ID_document%></p>
+      <p><%= f.label :Latest_Matric_Marks%></p>
+      <%= f.file_field(:id_document, multiple: true, data:{controller: "document-preview", action: "change->document-preview#preview"})%>
+    </div>
+    <div class='mb-4'>
+      <%= f.submit 'Apply', data:{turbo_confirm: 'Are you sure that these details are correct?', turbo_method: :post}, class:'btn btn-primary'%>
+    </div>
+  <% end %>
+  </div>
+</div>
+

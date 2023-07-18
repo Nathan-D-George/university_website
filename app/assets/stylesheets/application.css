@@ -43,3 +43,29 @@
   float: right;
   width: 48%;
  }
+ .flash-disappear{
+  position: absolute;
+  width: 50%;
+  z-index: 5;
+
+  animation: fade         5s forwards;
+  -webkit-animation: fade 5s forwards;
+  -moz-animation: fade    5s forwards;
+  -o-animation: fade      5s forwards;
+  -ms-animation: fade     5s forwards;
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

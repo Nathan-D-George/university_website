@@ -1,0 +1,19 @@
+<h2 style='padding:15px'>Sign In</h2>
+<div class='d-flex justify-content-center'>
+  <div class='col-md-5'>
+  <h4 style='padding-top: 15px; padding-bottom:15px'>Your Personal Information</h4>
+  <%= form_with model: @user, url: sign_in_path do |f| %>
+    <div class='mb-4'>
+      <%= f.label :email%>
+      <%= f.text_field :email, placeholder:'john@doe.com', class:'form-control', autocomplete: 'off' %>
+    </div>
+    <div class='mb-4'>
+      <%= f.label :password%>
+      <%= f.password_field :password, placeholder:'*********', class:'form-control' %>
+    </div>
+    <div class='mb-4'>
+      <%= f.submit 'Sign In', data:{turbo_confirm: 'Sign In?', turbo_method: :post}, class:'btn btn-secondary'%>
+    </div>
+  <% end %>
+  </div>
+</div>

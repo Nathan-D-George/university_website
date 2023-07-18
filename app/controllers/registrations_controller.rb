@@ -2,17 +2,18 @@ class RegistrationsController < ApplicationController
   def new
     @user = User.new
   end
+
   def create
     @user = User.new
-    debugger
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
-    if params[:user][:password] == params[:user][:password_confirmation]
-      @user.save
-      redirect_to root_path
+    @user.student_no = User.last.student_no+1
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to apply_path
     else
-      redirect_to residences_path
+      redirect_to root_path
     end
   end
   
@@ -24,6 +25,11 @@ class RegistrationsController < ApplicationController
   end
 
   def apply
+    if Current.user.nil?
+      redirect_to sign_in_path
+    else
+      flash[:alert] = 'You can register once its coded in'
+    end
   end
 
   def process_application
