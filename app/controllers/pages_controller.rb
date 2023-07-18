@@ -7,4 +7,26 @@ class PagesController < ApplicationController
 
   def residences
   end
+
+  def about
+  end
+  def calendars
+  end
+  def alumni
+  end
+  def departments
+  end
+  def electronic
+  end
+  def mechatronic
+  end
+  def mechanical
+  end
+  def civil
+  end
+  def careers
+  end
+
+  def ap_score
+  end
 end

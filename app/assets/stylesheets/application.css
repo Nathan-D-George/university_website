@@ -12,11 +12,34 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
 
  .syscol{
-  background-color: #040e5c;
+  /* background-color: #040e5c; */
+  background-color: #822019;
  }
  .syscol2{
-  background-color: #01420e;
+  background-color: #b3a757;
+  height: fit-content;
+  min-height: 912px;
+ }
+ .img-circle{
+  border-radius: 10%;
+ }
+
+ sectioning{
+  width: 1020px;
+  height: fit-content;
+  min-height: 350px;
+  padding: 12px;
+  border-radius: 10px;
+ }
+ .left{
+  float: left;
+  width: 48%;
+ }
+ .right{
+  float: right;
+  width: 48%;
  }

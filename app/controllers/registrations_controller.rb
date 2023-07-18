@@ -22,5 +22,11 @@ class RegistrationsController < ApplicationController
   def update
     @user = User.find(params[:id])
   end
+
+  def apply
+  end
+
+  def process_application
+  end
   
 end
