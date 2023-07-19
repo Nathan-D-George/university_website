@@ -2,21 +2,19 @@
 <div class='d-flex justify-content-center'>
   <div class='col-md-5'>
   <h4 style='padding-top: 15px; padding-bottom:15px'>Your Personal Information</h4>
-  <%= form_with model: @user, url: apply_path do |f| %>
+  <%= form_with model: @user, url: apply_path, method: :post, local: true do |f| %>
     <div class='mb-4'>
       <h5><p><%= f.label :qualification%></p></h5>
-      <p><%= f.label :note_applying_for_a_qualification_does_not_guarantee_a_position%></p>
-      <%= f.select(:qualification, options_for_select(['BEng Civil', 'BEng Electronic', 'BEng Mechatronic', 'BEng Mechanical'])) %>
+             <%= f.select(:qualification, options_for_select(['BEng Civil', 'BEng Electronic', 'BEng Mechatronic', 'BEng Mechanical'])) %>
     </div>
     <div class='mb-4'>
       <h5><p><%= f.label :residence%></p></h5>
-      <p><%= f.label :note_applying_for_residence_does_not_guarantee_a_position%></p>
-      <%= f.select(:residence, options_for_select(['none', 'House Novachrono', 'House Silva', 'House Vermillion'])) %>      
+             <%= f.select(:residence, options_for_select(['none', 'House Novachrono', 'House Silva', 'House Vermillion'])) %>      
     </div>
     <div class='mb-4'>
-      <h5><p><%= f.label :ID_document%></p></h5>
-      <p><%= f.label :Latest_Matric_Marks%></p>
-      <%= f.file_field(:id_document, multiple: true, data:{controller: "document-preview", action: "change->document-preview#preview"})%>
+      <h5><p><%= f.label :Documents %></p></h5>
+      <p> <li>ID</li></p>   <p> <li>Latest Marks</li></p>
+             <%= f.file_field(:attachments, multiple: true, data:{controller: "document-preview", action: "change->document-preview#preview"})%>
     </div>
     <div class='checkboxx col-9'>
       <input type='checkbox' id='checkboxx-box'>
@@ -27,7 +25,7 @@
         </p>
       </label>
       <div class='mb-4 checkbox-butt'>
-        <%= f.submit 'Apply', data:{turbo_method: :post}, class:"btn btn-primary "%>
+        <%= f.submit 'Apply', data:{turbo: false}, class:"btn btn-primary "%>
       </div>
     </div>  
   <% end %>

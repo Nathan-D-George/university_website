@@ -26,6 +26,9 @@ class PagesController < ApplicationController
   end
   def careers
   end
+  
+  def contact_us
+  end
 
   def ap_score
   end
