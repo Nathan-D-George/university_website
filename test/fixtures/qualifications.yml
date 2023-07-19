@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  credits_total: 1
+  credits_completed: 1
+
+two:
+  name: MyString
+  credits_total: 1
+  credits_completed: 1

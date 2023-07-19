@@ -29,4 +29,5 @@ class PagesController < ApplicationController
 
   def ap_score
   end
+
 end

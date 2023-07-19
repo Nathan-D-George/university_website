@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   get '/careers',     to: 'pages#careers'
   get '/ap_score',    to: 'pages#ap_score'
 
-
   get    '/sign_in',  to: 'sessions#new'
   post   '/sign_in',  to: 'sessions#create'
   delete '/sign_out', to: 'sessions#destroy'
@@ -21,7 +20,11 @@ Rails.application.routes.draw do
   get  '/sign_up',    to: 'registrations#new'
   post '/sign_up',    to: 'registrations#create'
   patch '/edit_user', to: 'registrations#edit'
-  get  '/apply',      to: 'registrations#apply'
-  post '/apply',      to: 'registrations#process_application'
+
+  # get  '/apply',      to: 'qualifications#apply'
+  # post '/apply',      to: 'qualifications#process_application'
+
+  get  '/apply',      to: 'qualifications#apply'
+  post '/apply',      to: 'qualifications#process_application'
 
 end
