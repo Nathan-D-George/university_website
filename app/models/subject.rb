@@ -1,4 +1,5 @@
 class Subject < ApplicationRecord
-  belongs_to :user
-  belongs_to :qualification
+  
+  has_many :packages
+  has_many :qualifications, through: :packages
 end

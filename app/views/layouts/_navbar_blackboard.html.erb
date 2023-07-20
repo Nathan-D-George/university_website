@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style='background-color: #000000'>
+ 
+  <div class="container-fluid col-md-10">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" href="/blackboard"><h5>Blackboard</h5></a> 
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link  active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Subjects
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/calendars">Calendars</a></li>
+            <li><a class="dropdown-item" href="/apply">Apply</a></li>
+          </ul>
+        </li>
+      </ul>
+      <% if !Current.user.nil? %>
+        <%= link_to Current.user.student_no, sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
+      <% end %>
+      <form class="d-flex" style="padding-left: 10px">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-info" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+  
+</nav>

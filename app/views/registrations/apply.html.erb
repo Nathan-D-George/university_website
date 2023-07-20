@@ -5,7 +5,7 @@
   <%= form_with model: @user, url: apply_path, method: :post, local: true do |f| %>
     <div class='mb-4'>
       <h5><p><%= f.label :qualification%></p></h5>
-             <%= f.select(:qualification, options_for_select(['BEng Civil', 'BEng Electronic', 'BEng Mechatronic', 'BEng Mechanical'])) %>
+             <%= f.select(:qualification, options_for_select(['BEng Civil', 'BEng Electronics', 'BEng Mechatronics', 'BEng Mechanical'])) %>
     </div>
     <div class='mb-4'>
       <h5><p><%= f.label :residence%></p></h5>

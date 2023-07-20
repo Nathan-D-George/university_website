@@ -1,7 +1,8 @@
 class Qualification < ApplicationRecord
-  belongs_to :user
+  has_many :bags
+  has_many :users, through: :bags
 
-  has_many_attached :attachments, dependent: :destroy
-
+  has_many :packages
+  has_many :subjects, through: :packages
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_132818) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_20_065243) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,38 +39,47 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_132818) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bags", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id", null: false
+    t.integer "qualification_id", null: false
+    t.index ["qualification_id"], name: "index_bags_on_qualification_id"
+    t.index ["user_id"], name: "index_bags_on_user_id"
+  end
+
+  create_table "packages", force: :cascade do |t|
+    t.integer "subject_id", null: false
+    t.integer "qualification_id", null: false
+    t.string "name"
+    t.index ["qualification_id"], name: "index_packages_on_qualification_id"
+    t.index ["subject_id"], name: "index_packages_on_subject_id"
+  end
+
   create_table "qualifications", force: :cascade do |t|
     t.string "name"
     t.integer "credits_total"
     t.integer "credits_completed", default: 0
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_qualifications_on_user_id"
   end
 
   create_table "subjects", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "qualification_id", null: false
     t.string "name"
     t.integer "credits", default: 16
     t.boolean "completed", default: false
     t.integer "mark"
-    t.index ["qualification_id"], name: "index_subjects_on_qualification_id"
-    t.index ["user_id"], name: "index_subjects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "student_no", default: 2000000000
+    t.integer "student_no", default: 2023000000
     t.string "email"
     t.string "password_digest"
     t.integer "role", default: 0
     t.boolean "residence", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "qualifications", "users"
-  add_foreign_key "subjects", "qualifications"
-  add_foreign_key "subjects", "users"
+  add_foreign_key "bags", "qualifications"
+  add_foreign_key "bags", "users"
+  add_foreign_key "packages", "qualifications"
+  add_foreign_key "packages", "subjects"
 end

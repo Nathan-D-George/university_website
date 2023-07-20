@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   get  '/apply',      to: 'registrations#apply'
   post '/apply',      to: 'registrations#process_application'
 
-  get 'blackboard', to: 'blackboard#home'
-  
+  get '/blackboard', to: 'blackboard#home'
 
 end

@@ -15,7 +15,6 @@ class RegistrationsController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
     params[:user][:role] == 'student' ?  @user.role = 0 :  @user.role =  1
     @user.student_no = User.where(role: @user.role).last.student_no+1
-    debugger
     if @user.save
       session[:user_id] = @user.id
       redirect_to apply_path      if @user.role == 0
@@ -37,8 +36,8 @@ class RegistrationsController < ApplicationController
     begin
       if Current.user.nil?
         redirect_to sign_in_path
-      elsif !Current.user.qualifications.nil?
-        if Current.user.qualifications.last.credits_total == Current.user.qualifications.last.credits_completed
+      elsif Current.user.qualifications.any?
+        if Current.user.qualifications.last.credits_total != Current.user.qualifications.last.credits_completed
           flash[:alert] = "You are currently registered for #{Current.user.qualifications.last.name}"
           redirect_to root_path
         else
@@ -54,14 +53,17 @@ class RegistrationsController < ApplicationController
 
   def process_application
     @user = Current.user
-    @qual = Qualification.new()
-    @qual.name    = params[:user][:qualification]
-    @qual.user_id = @user.id
-    @qual.attachments = params[:user][:attachments] if !params[:user][:attachments].nil?
-    qual = params[:user][:qualification]
-    qual == 'Bng Electronics' ? @qual.credits_total = 600 : qual == 'BEng Mechatronics' ? @qual.credits_total = 610 : @qual.credits_total = 590
+    @qual = Qualification.where(name: params[:user][:qualification]).first
+    @user.attachments = params[:user][:attachments] if !params[:user][:attachments].nil?
+
     params[:user][:residence] == 'none' ? @user.residence = false : @user.residence = true
-    if @qual.save
+
+    
+    bag                  = Bag.new(name:'bag')
+    bag.user_id          = @user.id
+    bag.qualification_id = @qual.id
+
+    if bag.save && @user.save
       flash[:notice] = 'Application successfully submitted'
       redirect_to root_path
     else
