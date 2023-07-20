@@ -11,6 +11,7 @@ class BlackboardController < ApplicationController
     @urls.each{|piece| 
       @black_board = true if piece == 'blackboard'
     }
+    
   end
 
 end

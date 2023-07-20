@@ -1,0 +1,32 @@
+<div class='d-flex align-items-center justify-content-center'>
+  <div class="card" style="background-color: black">
+    <div class="card-body">
+      <h2 style='padding:15px'>List of Subjects</h2>
+      <table class="table" style='color:white; width: 900px'>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Credits</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% counter = 1 %>
+          <% @subjects.each do |s|%>
+            <tr>
+              <th><%= counter %></th>
+              <td> <%= s.name%> </td>
+              <td> <%= s.credits%> </td>
+              <td style='width: 300px'> 
+                <%= link_to "Show",   show_subject_path(id: s.id), class:'btn btn-success' %> 
+                <%= link_to "Edit",   edit_subject_path(id: s.id), class:'btn btn-primary' %> 
+                <%= link_to "Delete", delete_subject_path(id: s.id), class:'btn btn-danger', data:{turbo_method: :delete, turbo_confirm: 'Delete Subject??'} %> </td>
+            </tr>
+            <% counter += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -20,10 +20,24 @@ Rails.application.routes.draw do
 
   get  '/sign_up',    to: 'registrations#new'
   post '/sign_up',    to: 'registrations#create'
-  patch '/edit_user', to: 'registrations#edit'
+  post '/edit_user', to: 'registrations#edit'
   get  '/apply',      to: 'registrations#apply'
   post '/apply',      to: 'registrations#process_application'
 
   get '/blackboard', to: 'blackboard#home'
 
+  get '/blackboard/new_subject',   to: 'subjects#new',     as: 'new_subject'
+  post'/blackboard/new_subject',   to: 'subjects#create',  as: 'create_subject'
+  get '/blackboard/edit_subject',  to: 'subjects#edit',    as: 'edit_subject'
+  patch'/blackboard/edit_subject', to: 'subjects#update',  as: 'update_subject'
+  get '/blackboard/show_subject',  to: 'subjects#show',    as: 'show_subject'
+  get '/blackboard/list_subjects', to: 'subjects#list',    as: 'list_subjects'
+  delete '/blackboard/delete_subject', to: 'subjects#destroy',    as: 'delete_subject'
+
+
 end
+
+
+
+# rooftops
+# so will i
