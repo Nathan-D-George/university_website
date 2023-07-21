@@ -4,6 +4,12 @@
     <%= link_to 'Make a Subject', new_subject_path, class:'btn btn-light'%>
     <%= link_to 'List All Subjects', list_subjects_path, class:'btn btn-light'%>
   <% else %>
-    <%= link_to 'Make a Subject', new_subject_path, class:'btn btn-dark'%>
+    <% @subjects.each do |s| %>
+      <div class="card col-md-8 mt-4 mb-4" style="background-color: #3d3d3d;">
+        <div class="card-body">
+          <p><%= link_to s.name, subject_content_path(id: s.id), style:'text-decoration: none; color: white'%></p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>

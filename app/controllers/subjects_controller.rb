@@ -1,8 +1,9 @@
 class SubjectsController < ApplicationController
   $edit_me = nil
+  DateTime.now.month < 7 ? $semester = 1 : $semester = 2
   def new
     if Current.user.role != 1
-      flash[:alert] = 'THis permission is reserved for lecturers'
+      flash[:alert] = 'This permission is reserved for lecturers'
       redirect_to blackboard_path
     else
       @subject = Subject.new
@@ -10,10 +11,8 @@ class SubjectsController < ApplicationController
   end
 
   def create
-    @subject = Subject.new
-    @subject.name = params[:subject][:name]
-    @subject.credits = params[:subject][:credits]
-    
+    @subject = Subject.new(sub_params)
+
     if @subject.save
       qual = 1 if !params[:subject][:EE].nil?
       Package.create(name:"Pack-EE#{@subject.id}}", subject_id: @subject.id, qualification_id: qual)
@@ -24,11 +23,11 @@ class SubjectsController < ApplicationController
       qual = 4 if !params[:subject][:CE].nil?
       Package.create(name:"Pack-CE#{@subject.id}", subject_id: @subject.id, qualification_id: qual)
       flash[:notice] = 'Subject successfully generated'
+      redirect_to list_subjects_path
     else
       flash[:alert] = 'Something went wrong. Try again later'
+      redirect_to blackboard_path
     end
-    
-    redirect_to blackboard_path
   end
 
   def edit
@@ -40,7 +39,9 @@ class SubjectsController < ApplicationController
 
     @subject = Subject.find($edit_me)
     @subject.name = params[:subject][:name]
-    @subject.credits = params[:subject][:credits]
+    @subject.credits  = params[:subject][:credits]
+    @subject.semester = params[:subject][:semester]
+    @subject.year     = params[:subject][:year]
     
     if @subject.save
       qual = 1 if !params[:subject][:EE].nil?
@@ -61,6 +62,17 @@ class SubjectsController < ApplicationController
 
   def list
     @subjects = Subject.all
+    @subjects_by_year = []
+    years = [1,2,3,4]
+
+    years.each{|y|
+      oneYear = []
+      @group  = Subject.where(year: y).all
+      @group.each{|g| oneYear.append(g)}
+      @subjects_by_year.append(oneYear)
+    }
+    @subjects_by_year
+
   end
 
   def show
@@ -82,5 +94,14 @@ class SubjectsController < ApplicationController
       flash[:notice] = 'Subject Successfully Disposed Of :thumbs_up'
       redirect_to list_subjects_path
     end
+  end
+
+  def content
+    @subject = Subject.find(params[:id])
+  end
+
+  private 
+  def sub_params
+    params.require(:subject).permit(:name, :credits, :semester, :year)
   end
 end

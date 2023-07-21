@@ -1,32 +1,26 @@
-<div class='d-flex align-items-center justify-content-center'>
-  <div class="card" style="background-color: black">
+<div class='d-flex align-items-center justify-content-center row'>
+  <div class="card col-md-8" style="background-color: black">
     <div class="card-body">
       <h2 style='padding:15px'>List of Subjects</h2>
-      <table class="table" style='color:white; width: 900px'>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Credits</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% counter = 1 %>
-          <% @subjects.each do |s|%>
-            <tr>
-              <th><%= counter %></th>
-              <td> <%= s.name%> </td>
-              <td> <%= s.credits%> </td>
-              <td style='width: 300px'> 
-                <%= link_to "Show",   show_subject_path(id: s.id), class:'btn btn-success' %> 
-                <%= link_to "Edit",   edit_subject_path(id: s.id), class:'btn btn-primary' %> 
-                <%= link_to "Delete", delete_subject_path(id: s.id), class:'btn btn-danger', data:{turbo_method: :delete, turbo_confirm: 'Delete Subject??'} %> </td>
-            </tr>
-            <% counter += 1 %>
-          <% end %>
-        </tbody>
-      </table>
+  
+      <% @subjects_by_year.each do |year| %>
+        <div class='collapsible col-md-12' id="collapsible">
+          <input type='checkbox' id="collapsible2-head-<%= year.first.year%>">
+          <label for="collapsible2-head-<%= year.first.year%>"><%= year.first.year%></label>
+          <div class="collapsible-text">
+            <div>
+              <%= render 'table', subjects: year %>
+            </div>
+          </div>
+        </div>
+      <%end%>
+
     </div>
   </div>
 </div>
+<div class='d-flex justify-content-end col-md-10'>
+  <div>
+    <%= link_to 'Make a Subject', new_subject_path, class:'btn btn-light'%>
+  </div>
+</div>
+

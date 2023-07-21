@@ -4,9 +4,13 @@
       <h2><%= @subject.name %></h2>
       <p><h4>Credits:</h4></p>
       <p><h5>&nbsp&nbsp<%= @subject.credits%></h5></p>
+      <p><h4>Semester:</h4></p>
+      <p><h5>&nbsp&nbsp<%= @subject.semester%></h5></p>
+      <p><h4>Year:</h4></p>
+      <p><h5>&nbsp&nbsp<%= @subject.year%></h5></p>
       <p><h4>Qualifications: </h4></p>
       <% @quals.each do |q|%>
-        <p><h5>&nbsp&nbsp<%= q %></h5></p>
+        <p><h5>&nbsp&nbsp<%= q  %></h5></p>
       <% end %>
     </div>
   </div>

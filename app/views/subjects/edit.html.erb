@@ -18,9 +18,19 @@
       <p><h5><%= f.label :Mechanical_Engineering%></h5></p>
       <%= f.check_box :MM, {}, true, false %>
     </div>
-    <div class='mb-4'>
-      <p><%= f.label :credits %></p>
-      <%= f.select(:credits, options_for_select([8,12,16,32])) %>
+    <div class='mb-4 row'>
+      <div class='col-4'>
+        <p><%= f.label :credits %></p>
+        <%= f.select(:credits, options_for_select([8,12,16,32])) %>
+      </div>
+      <div class='col-4'>
+        <p><%= f.label :semester %></p>
+        <%= f.select(:semester, options_for_select([1,2])) %>
+      </div>
+      <div class='col-4'>
+        <p><%= f.label :year %></p>
+        <%= f.select(:year, options_for_select([1,2,3,4])) %>
+      </div>
     </div>
     <div class='mb-4'>
       <%= f.submit 'Edit Subject', data:{turbo_confirm: 'Edit Subject?', turbo_method: :patch}, class:'btn btn-dark'%>

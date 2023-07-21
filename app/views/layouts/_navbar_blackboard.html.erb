@@ -17,12 +17,13 @@
         </li>
       </ul>
       <% if !Current.user.nil? %>
-        <%= link_to Current.user.student_no, sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
+        <% if Current.user.role == 0%>
+          <%= link_to "#{Current.user.student_no} - #{Current.user.qualifications.last.name}", sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
+        <% else %>
+          <%= link_to "#{Current.user.student_no} - Lecturer", sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
+        <% end %>
       <% end %>
-      <form class="d-flex" style="padding-left: 10px">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-info" type="submit">Search</button>
-      </form>
+
     </div>
   </div>
   
