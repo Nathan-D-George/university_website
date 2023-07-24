@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :email, presence: true, format: { with: /\A[^@\s]+@[^@\s]+\z/, message: "must be a valid email address" }
 
-  has_many_attached :attachments, dependent: :destroy
+  has_many_attached :attachments, dependent: :destroy 
   
   #after_create_commit { assign_student_no }
   after_commit :assign_student_no# add_default_avatar, on: %i[create update]

@@ -1,0 +1,24 @@
+<% if !@lessons_all.blank? %>
+  <h3><%= @subject.name%>: Lessons</h3>
+  <% if Current.user.role == 1 %>
+    <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
+    <% @lessons_all.each do |lesson| %>
+      <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
+        <div class="card-body">
+          <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <% @lessons_vis.each do |lesson| %>
+      <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
+        <div class="card-body">
+          <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <h3><%= @subject.name%></h3>
+  <p>There are no lessons for this subject yet.</p>
+<% end %>

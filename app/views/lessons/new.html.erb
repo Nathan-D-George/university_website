@@ -1,0 +1,22 @@
+<h1>New Lesson</h1>
+
+<div class='d-flex justify-content-center'>
+  <div class='col-md-5'>
+    <h4 style='padding-top: 15px; padding-bottom:15px'>Your Personal Information</h4>
+    <%= form_with model: @lesson, url: create_lesson_path, method: :post, local: true do |l| %>
+      <div class='mb-4'>
+        <h5><p><%= l.label :name%></p></h5>
+               <%= l.text_field :name, class:'form-control' %>
+      </div>
+      <div class='mb-4'>
+        <h5><p><%= l.label :description%></p></h5>
+               <%= l.text_area :description, class:'form-control' %>
+      </div>
+      <div class='mb-4'>
+        <h5><p><%= l.label :lesson_files %></p></h5>
+               <%= l.file_field(:attachments, multiple: true)%>
+      </div>
+      <%= l.submit 'Create Lesson', data:{turbo: false}, class:"btn btn-primary "%>
+    <% end %>
+  </div>
+</div>

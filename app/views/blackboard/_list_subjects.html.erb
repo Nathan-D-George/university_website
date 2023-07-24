@@ -1,0 +1,9 @@
+<% @subjects.each do |s| %>
+  <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
+    <div class="card-body">
+      <h5><%= link_to s.name, list_lessons_path(id: s.id), style:'text-decoration: none; color: white'%></h5>
+      <p> Credits: <%= s.credits%> </p>
+      <p> Course Year: <%= s.year%> </p>
+    </div>
+  </div>
+<% end %>

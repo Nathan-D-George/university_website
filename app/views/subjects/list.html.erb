@@ -6,7 +6,7 @@
       <% @subjects_by_year.each do |year| %>
         <div class='collapsible col-md-12' id="collapsible">
           <input type='checkbox' id="collapsible2-head-<%= year.first.year%>">
-          <label for="collapsible2-head-<%= year.first.year%>"><%= year.first.year%></label>
+          <label for="collapsible2-head-<%= year.first.year%>">Year <%= year.first.year%></label>
           <div class="collapsible-text">
             <div>
               <%= render 'table', subjects: year %>
