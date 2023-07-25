@@ -1,0 +1,38 @@
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <h3>New Assessment Marks For All Students</h3>
+    <div class='col-md-10' style='padding-bottm:100px'>
+      <%= form_with model:@assessment, url: new_assessment_path do |f| %>
+        <div class='col-4'>
+          <p><h5>  <%= f.label :assessment_name %>  </h5></p>
+          <%= f.text_field :name, class:'form-control mt-4'%>
+        </div>
+        <div class='mt-1 row'>
+          <div class='col-3'>
+          <p><h6>  <%= f.label :Student %> </h6></p>
+          <%= f.select(:student, options_for_select(@users)) %>
+          </div>
+          <div class='col-1'>
+          <p><h6>  <%= f.label :mark %> </h6></p>
+          <%= f.select(:mark, options_for_select(10..150)) %>
+          </div>
+          <div class='col-1'>
+          <p><h6>  <%= f.label :total %> </h6></p>
+          <%= f.select(:total, options_for_select(10..150)) %>
+          </div>
+          <div class='col-3'>
+            <p><h6><%= f.label :assessment_type%></h6></p>
+            <%= f.select(:assess_type, options_for_select(['tutorial','practical','project','A1','A2'])) %>
+          </div>
+          <div class='col-3'>
+            <p><h6><%= f.label :assessment_type %></h6></p>
+            <%= f.submit 'Create Assessment', class:'btn', style:'background-color: #3d3d3d; color: white'%>
+          </div>
+        </div>
+      <% end %> 
+    </div>
+    <div class='col-md-10' style='padding-top:150px'>
+      <%= render 'marks_table' %>
+    </div>
+  </div>
+</div> 

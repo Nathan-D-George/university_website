@@ -1,24 +1,44 @@
-<% if !@lessons_all.blank? %>
-  <h3><%= @subject.name%>: Lessons</h3>
-  <% if Current.user.role == 1 %>
-    <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
-    <% @lessons_all.each do |lesson| %>
-      <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
-        <div class="card-body">
-          <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
+<div class='blackboard-page'>
+  <div class='main-panel'>
+  <% if !@lessons_all.blank? %>
+    <h3><%= @subject.name%>: Lessons</h3>
+    <% if Current.user.role == 1 %>
+      <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-outline-light'%>
+      <%= link_to 'New Assessment', new_assessment_path(id: @subject.id), class:'btn btn-outline-light'%>
+      <% @lessons_all.each do |lesson| %>
+        <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
+          <div class="card-body">
+            <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
+          </div>
         </div>
-      </div>
+      <% end %>
+    <% else %>
+      <% @lessons_vis.each do |lesson| %>
+        <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
+          <div class="card-body">
+            <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   <% else %>
-    <% @lessons_vis.each do |lesson| %>
-      <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
-        <div class="card-body">
-          <h5><%= link_to lesson.name, show_lesson_path(id: lesson.id), style:'text-decoration: none; color: white'%></h5>
-        </div>
-      </div>
+    <h3><%= @subject.name%></h3>
+    <p>There are no lessons for this subject yet.</p>
+    <% if Current.user.role == 1 %>
+      <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
     <% end %>
   <% end %>
-<% else %>
-  <h3><%= @subject.name%></h3>
-  <p>There are no lessons for this subject yet.</p>
-<% end %>
+  </div>
+  <div class='side-panel'>
+    <div style='padding-top: 15px'>
+      <%= link_to blackboard_path, class:'btn', style:'width: 150px; color:white' do %>
+        <%= fa_icon 'home' %>
+      <% end %>
+    </div>
+    <div style='padding-top: 15px'>
+      <%= link_to '#', class:'btn', style:'width: 150px; color: white' do %>
+        <%= fa_icon 'bars' %>
+      <% end %>
+    </div>
+  </div>
+</div>

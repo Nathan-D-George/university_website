@@ -1,5 +1,9 @@
-<h1 style='color:white'>BlackBoard</h1>
-<% if Current.user.role == 0%>
-  <p><h3> Year <%= @subjects.first.year %> Semester <%= @subjects.first.semester%> </h3></p>
-<% end %>
-<%= render 'list_subjects' %>
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <h1 style='color:white'>BlackBoard</h1>
+    <% if Current.user.role == 0%>
+      <p><h3> Year <%= @subjects.first.year %> Semester <%= @subjects.first.semester%> </h3></p>
+    <% end %>
+    <%= render 'list_subjects' %>
+  </div>
+</div>

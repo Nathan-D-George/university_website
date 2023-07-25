@@ -45,8 +45,11 @@ Rails.application.routes.draw do
 
   get '/blackboard/secret', to: 'lessons#secret'
 
+  get    '/blackboard/assessment_new',    to: 'assessments#new',    as: 'new_assessment'
+  post   '/blackboard/assessment_new',    to: 'assessments#create', as: 'create_assessment'
+  get    '/blackboard/assessment_edit',   to: 'assessment#edit',    as: 'edit_assessment'
+  patch  '/blackboard/assessment_update', to: 'assessment#update',  as: 'update_assessment'
+  delete '/blackboard/assessment_delete', to: 'assessment#delete',  as: 'delete_assessment'
+
 end
 
-
-
-# so will i

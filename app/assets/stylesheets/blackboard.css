@@ -1,3 +1,16 @@
 .card-div{
   border-radius: 40px;
 }
+blackboard-page{
+  padding: 5px;
+}
+.side-panel{
+  width: 15%;
+  float: left;
+  padding-top: 100px;
+
+}
+.main-panel{
+  width: 80%;
+  float: right;
+}

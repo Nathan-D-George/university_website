@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_24_131742) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_072807) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_131742) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "assessments", force: :cascade do |t|
+    t.string "name"
+    t.integer "assess_type", default: 0
+    t.integer "mark", default: 10
+    t.integer "total", default: 10
+  end
+
   create_table "bags", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
@@ -53,6 +60,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_131742) do
     t.text "description", default: "Subject's description"
     t.boolean "visible", default: false
     t.index ["subject_id"], name: "index_lessons_on_subject_id"
+  end
+
+  create_table "marksboards", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "assessment_id", null: false
+    t.index ["assessment_id"], name: "index_marksboards_on_assessment_id"
+    t.index ["user_id"], name: "index_marksboards_on_user_id"
   end
 
   create_table "packages", force: :cascade do |t|
@@ -92,6 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_24_131742) do
   add_foreign_key "bags", "qualifications"
   add_foreign_key "bags", "users"
   add_foreign_key "lessons", "subjects"
+  add_foreign_key "marksboards", "assessments"
+  add_foreign_key "marksboards", "users"
   add_foreign_key "packages", "qualifications"
   add_foreign_key "packages", "subjects"
 end
