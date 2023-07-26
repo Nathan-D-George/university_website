@@ -72,7 +72,6 @@ class SubjectsController < ApplicationController
       @subjects_by_year.append(oneYear)
     }
     @subjects_by_year
-
   end
 
   def show

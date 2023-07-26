@@ -2,11 +2,11 @@ class EnlistmentsController < ApplicationController
   before_action :only_lecturers_allowed
 
   def new
+    are_you_the_real_lecturer(params[:id])
     @enlistment  = Enlistment.new
     @enlistments = students_enlisted(params[:id])
     @users       = students_only
     @subjects    = [Subject.find(params[:id].to_i).name]
-    console
     
   end
 
@@ -43,8 +43,9 @@ class EnlistmentsController < ApplicationController
   end
 
   private
+
   def only_lecturers_allowed
-    redirect_to blackboard_path, alert: 'Only Lecturers can do these things.' if Current.user.role != 1 || Current.user.nil?
+    redirect_to blackboard_path, alert: 'Only Lecturers can do these things.' if Current.user.role == 0 || Current.user.nil?
   end
 
   def students_only
@@ -79,4 +80,9 @@ class EnlistmentsController < ApplicationController
     students.sort_by {|s| s.student_no}
   end
 
+  def are_you_the_real_lecturer(subject_id)
+    return if Current.user.role = "ADMIN"
+    subject = Subject.find(subject_id)
+    redirect_to blackboard_path, alert: "Only this Subject's Lecturers can do these things." if Current.user.student_no != subject.lecturer
+  end
 end

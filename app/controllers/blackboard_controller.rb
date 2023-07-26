@@ -18,12 +18,20 @@ class BlackboardController < ApplicationController
         @subjects = []
         @hash     = {}
         @subs.each {|s| 
-          @hash[s] = 1, @subjects.append(s) if @hash[s].nil?  
+          @hash[s] = 1, @subjects.append(s) if @hash[s].nil?  && !Enlistment.where(subject_id: s.id, user_id: Current.user.id).first.blank?
         }
-      else
+      elsif Current.user.role == 1
+        subs = Subject.all
+        @subjects = []
+        hash      = {}
+        subs.each {|s| 
+          hash[s] = 1, @subjects.append(s) if hash[s].nil?  && s.lecturer == Current.user.student_no
+        }
+      else 
         @subjects = Subject.all
       end
     end
+    console
   end
 
 end

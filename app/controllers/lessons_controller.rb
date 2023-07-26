@@ -1,5 +1,9 @@
 class LessonsController < ApplicationController
-  $temp_subject = nil
+  $temp_subject = 11
+  before_action :assign_temp_subject, except: [:create, :update, :secret]
+  before_action :ensure_student_enlistment, only: [:list, :show]
+  before_action :ensure_correct_lecturer, only: [:new, :edit]
+
   def list
     @subject = Subject.find(params[:id])
     @lessons_all = Lesson.where(subject_id: @subject.id).all.order(id: :desc)
@@ -8,11 +12,10 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id].to_i)
-    redirect_to blackboard_path, alert: "This lesson is not Available Yet" if @lesson.visible != true && Current.user.role != 1
+    redirect_to blackboard_path, alert: "This lesson is not Available Yet" if @lesson.visible != true && Current.user.role == 0
   end
 
   def new
-    redirect_to blackboard_path, alert: "Lecturers Only" if Current.user.role != 1
     @lesson = Lesson.new(subject_id: params[:id].to_i)
     $temp_subject = params[:id].to_i
   end
@@ -32,7 +35,6 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    redirect_to blackboard_path, alert: "Lecturers Only" if Current.user.role != 1
     @lesson = Lesson.find(params[:id].to_i)
     $temp_subject = params[:id].to_i
   end
@@ -57,4 +59,22 @@ class LessonsController < ApplicationController
   def lesson_params
     params.require(:lesson).permit(:name, :description, attachments: [])
   end
+
+  def ensure_student_enlistment
+    return if Current.user.role != "student"
+    subject = Subject.find($temp_subject)
+    redirect_to blackboard_path, alert: 'You are not enrolled in this class yet.' if Enlistment.where(user_id: Current.user.id, subject_id: subject.id).first.blank?
+  end
+
+  def ensure_correct_lecturer
+    return if Current.user.role = "ADMIN"
+    redirect_to blackboard_path, alert: "Lecturers Only" if Current.user.role == "student"
+    subject = Subject.find($temp_subject)
+    redirect_to blackboard_path, alert: "Only this Subject's Lecturers can do these things." if Current.user.student_no != subject.lecturer && Current.user.role != "ADMIN"
+  end
+
+  def assign_temp_subject
+    $temp_subject = params[:id].to_i
+  end
+
 end

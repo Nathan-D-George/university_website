@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_26_075358) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_110650) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_26_075358) do
     t.integer "mark"
     t.integer "year", default: 1
     t.integer "semester", default: 1
+    t.integer "lecturer", default: 3023000000
   end
 
   create_table "users", force: :cascade do |t|

@@ -14,10 +14,10 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       flash[:notice] = 'You are successfully logged in' 
       redirect_to apply_path if @user.role == 0
-      redirect_to blackboard_path if @user.role == 1
+      redirect_to blackboard_path if @user.role != "student"
     else
       flash[:alert] = 'Something went wrong'
-      render 'new'
+      redirect_to sign_in_path
     end
   end
 

@@ -63,7 +63,7 @@ end
 =begin
 
   to do:
-    enable people to register for subjects they may have failed
+    tick:: enable people to register for subjects they may have failed
     enable a selection process instead of automatic acceptance (should be manual IRL but anyway)
     tick:: table to see only people who are registered for a subject marks
   
@@ -76,4 +76,5 @@ end
     Praise (Elevation)
     I speak Jesus (Charity Gayle)
     Holy Forever (Bethel)
+    
 =end

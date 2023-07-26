@@ -26,10 +26,12 @@
         <% end %>
       </ul>
       <% if !Current.user.nil? %>
-        <% if Current.user.role == 0%>
+        <% if Current.user.role == 0 %>
           <%= link_to "#{Current.user.student_no} - #{Current.user.qualifications.last.name}", sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
-        <% else %>
+        <% elsif Current.user.role == 1 %>
           <%= link_to "#{Current.user.student_no} - Lecturer", sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
+        <% else %>
+          <%= link_to "#{Current.user.student_no} - ADMIN", sign_out_path, data:{turbo_confirm: 'Log out?', turbo_method: :delete}, class:'nav-link active', style:"color: white" %>
         <% end %>
       <% end %>
 

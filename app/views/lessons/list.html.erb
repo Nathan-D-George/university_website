@@ -2,7 +2,7 @@
   <div class='main-panel'>
   <% if !@lessons_all.blank? %>
     <h3><%= @subject.name%>: Lessons</h3>
-    <% if Current.user.role == 1 %>
+    <% if Current.user.role != 0 %>
       <%= link_to 'New Lesson',  new_lesson_path(id: @subject.id), class:'btn btn-outline-light'%>
       <%= link_to 'Add Marks',   new_assessment_path(id: @subject.id), class:'btn btn-outline-light'%>
       <%= link_to 'Enlistments', new_enlistment_path(id: @subject.id), class:'btn btn-outline-light'%>
@@ -25,19 +25,19 @@
   <% else %>
     <h3> <%= @subject.name%> </h3>
     <p> There are no lessons for this subject yet. </p>
-    <% if Current.user.role == 1 %>
+    <% if Current.user.role != 0 %>
       <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
     <% end %>
   <% end %>
   </div>
   <div class='side-panel'>
     <div style='padding-top: 15px'>
-      <%= link_to blackboard_path, class:'btn', style:'width: 150px; color:white' do %>
+      <%= link_to blackboard_path, class:'btn btn-dark', style:'width: 150px; color:white; background-color: #3d3d3d' do %>
         <%= fa_icon 'home' %>
       <% end %>
     </div>
     <div style='padding-top: 15px'>
-      <%= link_to '#', class:'btn', style:'width: 150px; color: white' do %>
+      <%= link_to '#', class:'btn btn-dark', style:'width: 150px; color: white; background-color: #3d3d3d' do %>
         <%= fa_icon 'bars' %>
       <% end %>
     </div>

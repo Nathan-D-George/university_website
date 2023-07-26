@@ -1,5 +1,6 @@
 class AssessmentsController < ApplicationController
-  before_action :only_lecturers_allowed
+  before_action :assign_temp_subject, only: [:new, :update]
+  before_action :ensure_correct_lecturer
   $temp_subject    = nil
   $temp_assessment = nil
   
@@ -71,8 +72,21 @@ class AssessmentsController < ApplicationController
     params.require(:assessment).permit(:name, :mark, :total, :assess_type)
   end
 
-  def only_lecturers_allowed
-    redirect_to blackboard_path, alert: 'Only Lecturers can do these things!' if Current.user.role != 1
+  def ensure_student_enlistment
+    return if Current.user.role != "student"
+    subject = Subject.find($temp_subject)
+    redirect_to blackboard_path, alert: 'You are not enrolled in this class yet.' if Enlistment.where(user_id: Current.user.id, subject_id: subject.id).first.blank?
+  end
+
+  def ensure_correct_lecturer
+    return if Current.user.role = "ADMIN"
+    redirect_to blackboard_path, alert: "Lecturers Only" if Current.user.role != 1
+    subject = Subject.find($temp_subject)
+    redirect_to blackboard_path, alert: "Only this Subject's Lecturers can do these things." if Current.user.student_no != subject.lecturer
+  end
+
+  def assign_temp_subject
+    $temp_subject = params[:id].to_i
   end
 
   def get_users_per_assessment(subject_id)
@@ -100,4 +114,5 @@ class AssessmentsController < ApplicationController
     }
     array_assessments
   end
+
 end
