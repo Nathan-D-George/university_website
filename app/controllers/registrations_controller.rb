@@ -28,6 +28,7 @@ class RegistrationsController < ApplicationController
   def edit
     @user = Current.user
   end
+  
   def update
     @user = User.find(params[:id])
   end
@@ -71,4 +72,5 @@ class RegistrationsController < ApplicationController
       redirect_to root_path
     end
   end
+  
 end

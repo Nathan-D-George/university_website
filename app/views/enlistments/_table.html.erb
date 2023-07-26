@@ -1,0 +1,21 @@
+ <h3>Marks Table</h3>
+<table class="table" style='color: white'>
+  <thead>
+    <tr>
+      <th scope="col">Subject</th>
+      <th scope="col">Student</th>
+      <th scope="col">Student_no</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @enlistments.each do |e| %>
+      <tr>
+        <td><%= @subjects.first %></td>
+        <td><%= e.email %>       </td>
+        <td><%= e.student_no %>  </td>
+        <td><%= link_to "Edit", edit_enlistment_path(student_id: e.id, subject_name: @subjects.first), class:'btn btn-dark', style:'color:orange; background-color: black'  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

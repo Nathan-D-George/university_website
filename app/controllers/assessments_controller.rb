@@ -1,18 +1,17 @@
 class AssessmentsController < ApplicationController
   before_action :only_lecturers_allowed
-  $temp_subject = nil
+  $temp_subject    = nil
+  $temp_assessment = nil
   
   def show
     @assessment = Assessment.find(params[:id])
   end
 
   def new
-    @assessment = Assessment.new
+    @assessment   = Assessment.new
     $temp_subject = params[:id]
-    @subject = Subject.find(params[:id].to_i)
     @users = get_users_per_assessment(params[:id])
-    var = User.where(email: @users).first.qualifications.last.subjects.find($temp_subject)
-    console
+    @assessments = get_users_assessments_for_subject(params[:id].to_i)
   end
   
   def create
@@ -22,6 +21,7 @@ class AssessmentsController < ApplicationController
     @assessment.total = params[:assessment][:total]
     num = Assessment.assess_types[params[:assessment][:assess_type]]
     @assessment.assess_type = num
+    @assessment.subject_id  = $temp_subject
     if @assessment.save
       @marksboard = Marksboard.new
       @marksboard.user_id       = User.where(email: params[:assessment][:student]).first.id
@@ -38,22 +38,23 @@ class AssessmentsController < ApplicationController
   end
   
   def edit
-    debugger
-    @assessment = Assessment.find_by(params[:id])
+    @assessment      = Assessment.find(params[:id])
+    $temp_assessment = params[:id]
+    @assessments = get_users_assessments_for_subject(params[:id].to_i)
+    console
   end
 
   def update
-    debugger
-    # @assessment = Assessment.find_by()
+    @assessment = Assessment.find($temp_assessment)
     @assessment.name  = params[:assessment][:name]
     @assessment.mark  = params[:assessment][:mark]
     @assessment.total = params[:assessment][:total]
     if @assessment.save
       flash[:notice] = 'Assessment Successfully Updated'
-      redirect_to list_lessons_path
+      redirect_to new_assessment_path(id: @assessment.subject_id )
     else
       flash[:alert] = 'Problem with updating Assessment'
-      render :edit
+      redirect_to edit_assessment_path
     end 
   end
 
@@ -87,5 +88,16 @@ class AssessmentsController < ApplicationController
       }
     }
     array_users
+  end
+
+  def get_users_assessments_for_subject(subject_id)
+    marks = Marksboard.all
+    array_assessments = []
+    marks.each {|m|
+      if Assessment.find(m.assessment_id).subject_id == subject_id
+        array_assessments.append({assessment: Assessment.find(m.assessment_id), student: User.find(m.user_id)})
+      end 
+    }
+    array_assessments
   end
 end

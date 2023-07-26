@@ -1,0 +1,6 @@
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <h3> Edit Enlistment </h3> 
+    <%= link_to 'Cancel Enrollment?', destroy_enlistment_path(id: @enlistment.id), data:{turbo_method: :delete, turbo_confirm: 'Unenroll?'}, class:'btn btn-outline-danger'%>
+  </div>
+</div>

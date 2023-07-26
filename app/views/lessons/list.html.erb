@@ -3,8 +3,9 @@
   <% if !@lessons_all.blank? %>
     <h3><%= @subject.name%>: Lessons</h3>
     <% if Current.user.role == 1 %>
-      <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-outline-light'%>
-      <%= link_to 'New Assessment', new_assessment_path(id: @subject.id), class:'btn btn-outline-light'%>
+      <%= link_to 'New Lesson',  new_lesson_path(id: @subject.id), class:'btn btn-outline-light'%>
+      <%= link_to 'Add Marks',   new_assessment_path(id: @subject.id), class:'btn btn-outline-light'%>
+      <%= link_to 'Enlistments', new_enlistment_path(id: @subject.id), class:'btn btn-outline-light'%>
       <% @lessons_all.each do |lesson| %>
         <div class="card col-md-8 mt-4 mb-4 card-div" style="background-color: #3d3d3d;">
           <div class="card-body">
@@ -22,8 +23,8 @@
       <% end %>
     <% end %>
   <% else %>
-    <h3><%= @subject.name%></h3>
-    <p>There are no lessons for this subject yet.</p>
+    <h3> <%= @subject.name%> </h3>
+    <p> There are no lessons for this subject yet. </p>
     <% if Current.user.role == 1 %>
       <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
     <% end %>

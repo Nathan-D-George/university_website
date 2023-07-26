@@ -2,20 +2,22 @@
 <table class="table" style='color: white'>
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Assessment</th>
       <th scope="col">Student</th>
       <th scope="col">Mark</th>
       <th scope="col">Total</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>A1</td>
-      <td>Otto</td>
-      <td>20</td>
-      <td>25</td>
-    </tr>
+    <% @assessments.each do |a| %>
+      <tr>
+        <td><%= a[:assessment].name %></td>
+        <td><%= a[:student].email %></td>
+        <td><%= a[:assessment].mark %></td>
+        <td><%= a[:assessment].total %></td>
+        <td><%= link_to "Edit", edit_assessment_path(id: a[:assessment].id), class:'btn btn-dark', style:'color:orange; background-color: black'  %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>

@@ -21,20 +21,21 @@ Rails.application.routes.draw do
 
   get  '/sign_up',    to: 'registrations#new'
   post '/sign_up',    to: 'registrations#create'
-  post '/edit_user', to: 'registrations#edit'
+  post '/edit_user',  to: 'registrations#edit'
   get  '/apply',      to: 'registrations#apply'
   post '/apply',      to: 'registrations#process_application'
 
   get '/blackboard', to: 'blackboard#home'
+  get '/blackboard/secret', to: 'lessons#secret'
 
-  get    '/blackboard/new_subject',     to: 'subjects#new',     as: 'new_subject'
-  post   '/blackboard/new_subject',     to: 'subjects#create',  as: 'create_subject'
-  get    '/blackboard/edit_subject',    to: 'subjects#edit',    as: 'edit_subject'
-  patch  '/blackboard/edit_subject',    to: 'subjects#update',  as: 'update_subject'
-  get    '/blackboard/show_subject',    to: 'subjects#show',    as: 'show_subject'
-  get    '/blackboard/list_subjects',   to: 'subjects#list',    as: 'list_subjects'
-  delete '/blackboard/delete_subject',  to: 'subjects#destroy', as: 'delete_subject'
-  get    '/blackboard/subject/content', to: 'subjects#content', as: 'subject_content'
+  get    '/blackboard/subject_new',     to: 'subjects#new',     as: 'new_subject'
+  post   '/blackboard/subject_new',     to: 'subjects#create',  as: 'create_subject'
+  get    '/blackboard/subject_edit',    to: 'subjects#edit',    as: 'edit_subject'
+  patch  '/blackboard/subject_edit',    to: 'subjects#update',  as: 'update_subject'
+  get    '/blackboard/subject_show',    to: 'subjects#show',    as: 'show_subject'
+  get    '/blackboard/subjects_list',   to: 'subjects#list',    as: 'list_subjects'
+  delete '/blackboard/subject_delete',  to: 'subjects#destroy', as: 'delete_subject'
+  get    '/blackboard/subject_content', to: 'subjects#content', as: 'subject_content'
 
   get    '/blackboard/lessons_list',   to: 'lessons#list',   as: 'list_lessons'
   get    '/blackboard/lessons_show',   to: 'lessons#show',   as: 'show_lesson'
@@ -43,13 +44,36 @@ Rails.application.routes.draw do
   get    '/blackboard/lessons_edit',   to: 'lessons#edit',   as: 'edit_lesson'
   patch  '/blackboard/lessons_update', to: 'lessons#update', as: 'update_lesson'
 
-  get '/blackboard/secret', to: 'lessons#secret'
+  
 
   get    '/blackboard/assessment_new',    to: 'assessments#new',    as: 'new_assessment'
   post   '/blackboard/assessment_new',    to: 'assessments#create', as: 'create_assessment'
-  get    '/blackboard/assessment_edit',   to: 'assessment#edit',    as: 'edit_assessment'
-  patch  '/blackboard/assessment_update', to: 'assessment#update',  as: 'update_assessment'
-  delete '/blackboard/assessment_delete', to: 'assessment#delete',  as: 'delete_assessment'
+  get    '/blackboard/assessment_edit',   to: 'assessments#edit',   as: 'edit_assessment'
+  patch  '/blackboard/assessment_update', to: 'assessments#update', as: 'update_assessment'
+  delete '/blackboard/assessment_delete', to: 'assessments#delete', as: 'delete_assessment'
+
+  get    '/blackboard/enlistment_new',    to: 'enlistments#new',     as: 'new_enlistment'
+  post   '/blackboard/enlistment_new',    to: 'enlistments#create',  as: 'create_enlistment'
+  get    '/blackboard/enlistment_edit',   to: 'enlistments#edit',    as: 'edit_enlistment'
+  delete '/blackboard/enlistment_delete', to: 'enlistments#destroy', as: 'destroy_enlistment'
+  
 
 end
 
+=begin
+
+  to do:
+    enable people to register for subjects they may have failed
+    enable a selection process instead of automatic acceptance (should be manual IRL but anyway)
+    tick:: table to see only people who are registered for a subject marks
+  
+
+  pre-prayer:
+    i surrender (extended version)
+    Yahweh will manifest
+
+  Worship:
+    Praise (Elevation)
+    I speak Jesus (Charity Gayle)
+    Holy Forever (Bethel)
+=end

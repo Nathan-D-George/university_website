@@ -1,1 +1,33 @@
-Edit Assessment
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <h3>Edit Assessment</h3>
+    <div class='col-md-10' style='padding-bottm:100px'>
+      <%= form_with model:@assessment, url: update_assessment_path do |f| %>
+        <div class='col-4'>
+          <p><h5>  <%= f.label :assessment_name %>  </h5></p>
+          <%= f.text_field :name, class:'form-control mt-4'%>
+        </div>
+        <div class='mt-1'>
+          <div>
+            <p><h6>  <%= f.label :mark %> </h6></p>
+
+            <%= f.text_field :mark%>
+          </div>
+          <div>
+            <p><h6>  <%= f.label :total %> </h6></p>
+    
+            <%= f.text_field :total%>
+          </div>
+          <div>
+            <p><h6><%= f.label :assessment_type%></h6></p>
+            <%= f.select(:assess_type, options_for_select(['tutorial','practical','project','A1','A2'])) %>
+          </div>
+          <div>
+            <p><h6><%= f.label :assessment_type %></h6></p>
+            <%= f.submit 'Update Assessment', class:'btn', style:'background-color: #3d3d3d; color: white'%>
+          </div>
+        </div>
+      <% end %> 
+    </div>
+  </div>
+</div> 

@@ -1,6 +1,6 @@
 class Assessment < ApplicationRecord
   
-  # belongs_to :subject
+  belongs_to :subject
   
   has_many :marksboards
   has_many :users, through: :marksboards

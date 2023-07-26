@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_25_072807) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_26_075358) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_072807) do
     t.integer "assess_type", default: 0
     t.integer "mark", default: 10
     t.integer "total", default: 10
+    t.integer "subject_id", null: false
+    t.index ["subject_id"], name: "index_assessments_on_subject_id"
   end
 
   create_table "bags", force: :cascade do |t|
@@ -52,6 +54,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_072807) do
     t.integer "qualification_id", null: false
     t.index ["qualification_id"], name: "index_bags_on_qualification_id"
     t.index ["user_id"], name: "index_bags_on_user_id"
+  end
+
+  create_table "enlistments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "subject_id", null: false
+    t.index ["subject_id"], name: "index_enlistments_on_subject_id"
+    t.index ["user_id"], name: "index_enlistments_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -103,8 +112,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_072807) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "assessments", "subjects"
   add_foreign_key "bags", "qualifications"
   add_foreign_key "bags", "users"
+  add_foreign_key "enlistments", "subjects"
+  add_foreign_key "enlistments", "users"
   add_foreign_key "lessons", "subjects"
   add_foreign_key "marksboards", "assessments"
   add_foreign_key "marksboards", "users"
