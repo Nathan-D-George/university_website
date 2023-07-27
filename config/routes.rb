@@ -27,9 +27,10 @@ Rails.application.routes.draw do
 
   get  '/blackboard',            to: 'blackboard#home'
   get  '/blackboard/secret',     to: 'lessons#secret'
-  get  '/blackboard/admin_page', to: 'enlistments#add_lecturer'
+  get  '/blackboard/admin_page', to: 'enlistments#add_lecturer', as: 'admin_page'
   post '/blackboard/admin_page', to: 'enlistments#actually_add_lecturer'
 
+  resources :subjects, except: [:destroy, :new, :edit]
   get    '/blackboard/subject_new',     to: 'subjects#new',     as: 'new_subject'
   post   '/blackboard/subject_new',     to: 'subjects#create',  as: 'create_subject'
   get    '/blackboard/subject_edit',    to: 'subjects#edit',    as: 'edit_subject'
@@ -39,6 +40,7 @@ Rails.application.routes.draw do
   delete '/blackboard/subject_delete',  to: 'subjects#destroy', as: 'delete_subject'
   get    '/blackboard/subject_content', to: 'subjects#content', as: 'subject_content'
 
+  resources :lessons, except: [:destroy, :new, :edit]
   get    '/blackboard/lessons_list',   to: 'lessons#list',   as: 'list_lessons'
   get    '/blackboard/lessons_show',   to: 'lessons#show',   as: 'show_lesson'
   get    '/blackboard/lessons_new',    to: 'lessons#new',    as: 'new_lesson'

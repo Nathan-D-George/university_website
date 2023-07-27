@@ -1,43 +1,13 @@
-<h2 style='padding:15px'>Create A Subject</h2>
-<div class='d-flex justify-content-center'>
-  <div class='col-md-5'>
-  <h3 style='padding-top: 15px; padding-bottom:15px'>Subject Information</h3>
-  <%= form_with model: @subject, url: create_subject_path do |f| %>
-    <div class='mb-4'>
-      <p><h5><%= f.label :Name%></h5></p>
-      <%= f.text_field :name, placeholder:'differential equations', class:'form-control', autocomplete: 'off' %>
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <div class='col-md-7'>
+      <h2>Create A Subject</h2>
+      <h3 style='padding-top: 15px; padding-bottom:15px'>Subject Information</h3>
+      <%= render 'form'%>
     </div>
-    <div class='mb-4'>
-      <p><h4><%= f.label :qualifications_This_Subject_Falls_Under%></h4></p>
-      <h5><%= f.label :Civil_Engineering%></h5>
-      <%= f.check_box :CE, {}, true, false %>
-      <p><h5><%= f.label :Electronic_Engineering%></h5></p>
-      <%= f.check_box :EE, {}, true, false %>
-      <p><h5><%= f.label :Mechatronic_Engineering%></h5></p>
-      <%= f.check_box :MC, {}, true, false %>
-      <p><h5><%= f.label :Mechanical_Engineering%></h5></p>
-      <%= f.check_box :MM, {}, true, false %>
-    </div>
-    <div class='mb-4 row'>
-      <div class='col-4'>
-        <p><%= f.label :credits %></p>
-        <%= f.select(:credits, options_for_select([8,12,16,32])) %>
-      </div>
-      <div class='col-4'>
-        <p><%= f.label :semester %></p>
-        <%= f.select(:semester, options_for_select([1,2])) %>
-      </div>
-      <div class='col-4'>
-        <p><%= f.label :year %></p>
-        <%= f.select(:year, options_for_select([1,2,3,4])) %>
-      </div>
-    </div>
-    <div class='mb-4'>
-      <%= f.submit 'Create Subject', data:{turbo_confirm: 'Are you sure that these details are correct?', turbo_method: :post}, class:'btn btn-dark'%>
-    </div>
-  <% end %>
-  </div>
-</div>
     <div class='mb-4'>
       <%= link_to "Cancel", list_subjects_path, class:'btn btn-dark'%>
     </div>
+  </div>
+</div>
+

@@ -1,21 +1,40 @@
- <h3>Marks Table</h3>
 <table class="table" style='color: white'>
+  <% if !@enlistments.nil? %>
   <thead>
-    <tr>
-      <th scope="col">Subject</th>
+    <tr> 
       <th scope="col">Student</th>
       <th scope="col">Student_no</th>
-      <th scope="col"></th>
+      <th scope="col"></th> 
     </tr>
   </thead>
-  <tbody>
+  <tbody>    
     <% @enlistments.each do |e| %>
       <tr>
-        <td><%= @subjects.first %></td>
         <td><%= e.email %>       </td>
         <td><%= e.student_no %>  </td>
         <td><%= link_to "Edit", edit_enlistment_path(student_id: e.id, subject_name: @subjects.first), class:'btn btn-dark', style:'color:orange; background-color: black'  %></td>
       </tr>
     <% end %>
+  <% else %>
+  <thead>
+    <tr> 
+      <th scope="col">Subject</th>
+      <th scope="col">Lecturer</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>    
+    <% @subjects.each do |s| %>
+      <tr>
+        <td><%= s.name %></td>
+        <% if s.lecturer != 3023000000 %>
+          <td><p style='color:green'><%= User.where(student_no: s.lecturer).first.email %>  </p> </td>
+        <% else %>
+          <td> <p style='color:red'>unassigned</p>  </td>
+        <% end %>
+        <td><%= link_to "Edit", '#', class:'btn btn-dark', style:'color:orange; background-color: black'  %></td>
+      </tr>
+    <% end %>
+  <% end %>
   </tbody>
 </table>

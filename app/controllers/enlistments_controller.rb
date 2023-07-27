@@ -7,27 +7,39 @@ class EnlistmentsController < ApplicationController
     @enlistments = students_enlisted(params[:id])
     @users       = students_only
     @subjects    = [Subject.find(params[:id].to_i).name]
-    
   end
 
   def create
     enlistment = Enlistment.new
-    enlistment.user_id    = User.where(email: params[:enlistment][:student_email]).first.id
-    enlistment.subject_id = Subject.where(name: params[:enlistment][:subject]).first.id
-    enlistment_exists = already_exists?(enlistment.user_id, enlistment.subject_id)
-
-    if !enlistment_exists
-      if enlistment.save 
-        flash[:notice] = 'Successfully enrolled student in course'
-        redirect_to new_assessment_path
+    array = params[:enlistment][:email].split('@')
+    if array.last == "student.com"
+      enlistment.user_id    = User.where(email: params[:enlistment][:email]).first.id
+      enlistment.subject_id = Subject.where(name: params[:enlistment][:subject]).first.id
+      enlistment_exists = already_exists?(enlistment.user_id, enlistment.subject_id)
+      if !enlistment_exists
+        if enlistment.save 
+          flash[:notice] = 'Successfully enrolled student in course'
+          redirect_to new_assessment_path
+        else
+          flash[:alert] = 'Error in enrolling student.'
+          redirect_to new_assessment_path
+        end
       else
-        flash[:alert] = 'Error in enrolling student.'
+        flash[:alert] = 'Enrollment may exist already.'
         redirect_to new_assessment_path
       end
     else
-      flash[:alert] = 'Enrollment may exist already.'
-      redirect_to new_assessment_path
+      lecturer = User.where(email: params[:enlistment][:email]).first
+      subject  = Subject.where(name: params[:enlistment][:subject]).first
+      subject.lecturer = lecturer.student_no
+      if subject.save
+        flash[:notice] = "Successfully appointed #{lecturer.email} lecturer of #{subject.name}"
+      else
+        flash[:alert] = "Something went wrong with lecturer appointment"
+      end
+      redirect_to admin_page_path
     end
+
   end
 
   def edit
@@ -44,12 +56,11 @@ class EnlistmentsController < ApplicationController
 
   def add_lecturer
     redirect_to blackboard_path, alert: 'ADMINs only!' if Current.user.role != "ADMIN"
-    @subjects = subject_names
-    @users    = lecturers_names
-  end
-
-  def actually_add_lecturer
-    
+    @subjects       = Subject.all
+    @subjects_names = subject_names
+    @users          = lecturers_names
+    @users.prepend("unassign")
+    # @enlistment     = Enlistment.new
   end
 
   private

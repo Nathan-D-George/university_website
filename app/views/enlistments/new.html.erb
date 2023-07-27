@@ -1,9 +1,10 @@
 <div class='blackboard-page'>
   <div class='main-panel'>
-    <h3> New Enlistment </h3>  
-    <%= render 'form' %>
+    <h3> New Enlistment for <%= @subjects.first %> </h3>  
+    <%= render 'form', subjects: @subjects %>
     <div class='col-md-9'style='padding-top:100px;'>
-      <%= render 'table'  %>
+      <h3>Students of: &nbsp<%= @subjects.first %> </h3>
+      <%= render 'table' %> 
     </div>
   </div>
-</div>
+</div> 

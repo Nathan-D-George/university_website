@@ -1,16 +1,16 @@
-<%= form_with model: @enlistment, url: locals[:path], method: locals[:method] do |f| %>
+<%= form_with model: @enlistment, url: create_enlistment_path, method: :post do |f| %>
   <div class='mt-1 row'>
     <div class='col-3'> 
-    <p><h6>  <%= f.label :Student_email%> </h6></p>
-    <%= f.select(:student_email, options_for_select(@users)) %>
+    <p><h6>  <%= f.label :Email%> </h6></p>
+    <%= f.select(:email, options_for_select(@users)) %> 
     </div>
     <div class='col-3'>
       <p><h6><%= f.label :Subject%></h6></p>
-      <%= f.select(:subject, options_for_select(@subjects)) %>
+      <%= f.select(:subject, options_for_select(subjects)) %> 
     </div>
     <div class='col-3'>
       <p><h6><%= f.label :assessment_type %></h6></p>
-      <%= f.submit button_text, class:'btn', style:'background-color: #3d3d3d; color: white'%>
+      <%= f.submit 'Enlist', class:'btn', style:'background-color: #3d3d3d; color: white'%>
     </div>
   </div>
 <% end %> 

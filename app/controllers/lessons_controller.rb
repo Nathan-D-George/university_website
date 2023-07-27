@@ -40,12 +40,14 @@ class LessonsController < ApplicationController
   end
 
   def update
-    @lesson = Lesson.find($temp_subject)
-    params[:lesson][:visible] == "true" ? @lesson.visible = true : @lesson.visible = false
+    lesson = Lesson.find($temp_subject)
+    lesson.name        = params[:lesson][:name]
+    lesson.description = params[:lesson][:description]
+    params[:lesson][:visible] == "true" ? lesson.visible = true : lesson.visible = false
     $temp_subject = nil
-    if @lesson.save
+    if lesson.save
       flash[:notice] = 'Lesson Successfully Updated'
-      redirect_to show_lesson_path(id: @lesson.id)
+      redirect_to show_lesson_path(id: lesson.id)
     else
       flash[:alert] = 'Something went wrong with lesson editing'
       render :edit
