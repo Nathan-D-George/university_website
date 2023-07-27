@@ -56,12 +56,13 @@ class LessonsController < ApplicationController
   end
 
   private
+
   def lesson_params
     params.require(:lesson).permit(:name, :description, attachments: [])
   end
 
   def ensure_student_enlistment
-    return if Current.user.role != "student"
+    return if Current.user.role != "student" 
     subject = Subject.find($temp_subject)
     redirect_to blackboard_path, alert: 'You are not enrolled in this class yet.' if Enlistment.where(user_id: Current.user.id, subject_id: subject.id).first.blank?
   end

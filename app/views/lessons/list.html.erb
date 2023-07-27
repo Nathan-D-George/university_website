@@ -2,7 +2,7 @@
   <div class='main-panel'>
   <% if !@lessons_all.blank? %>
     <h3><%= @subject.name%>: Lessons</h3>
-    <% if Current.user.role != 0 %>
+    <% if Current.user.role != "student" %>
       <%= link_to 'New Lesson',  new_lesson_path(id: @subject.id), class:'btn btn-outline-light'%>
       <%= link_to 'Add Marks',   new_assessment_path(id: @subject.id), class:'btn btn-outline-light'%>
       <%= link_to 'Enlistments', new_enlistment_path(id: @subject.id), class:'btn btn-outline-light'%>
@@ -25,7 +25,7 @@
   <% else %>
     <h3> <%= @subject.name%> </h3>
     <p> There are no lessons for this subject yet. </p>
-    <% if Current.user.role != 0 %>
+    <% if Current.user.role != "student" %>
       <%= link_to 'New Lesson', new_lesson_path(id: @subject.id), class:'btn btn-light'%>
     <% end %>
   <% end %>

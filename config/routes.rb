@@ -25,8 +25,10 @@ Rails.application.routes.draw do
   get  '/apply',      to: 'registrations#apply'
   post '/apply',      to: 'registrations#process_application'
 
-  get '/blackboard', to: 'blackboard#home'
-  get '/blackboard/secret', to: 'lessons#secret'
+  get  '/blackboard',            to: 'blackboard#home'
+  get  '/blackboard/secret',     to: 'lessons#secret'
+  get  '/blackboard/admin_page', to: 'enlistments#add_lecturer'
+  post '/blackboard/admin_page', to: 'enlistments#actually_add_lecturer'
 
   get    '/blackboard/subject_new',     to: 'subjects#new',     as: 'new_subject'
   post   '/blackboard/subject_new',     to: 'subjects#create',  as: 'create_subject'
@@ -66,7 +68,9 @@ end
     tick:: enable people to register for subjects they may have failed
     enable a selection process instead of automatic acceptance (should be manual IRL but anyway)
     tick:: table to see only people who are registered for a subject marks
-  
+    
+    finalize admin rights
+    admin must assign lecturers to subjects
 
   pre-prayer:
     i surrender (extended version)
@@ -76,5 +80,5 @@ end
     Praise (Elevation)
     I speak Jesus (Charity Gayle)
     Holy Forever (Bethel)
-    
+
 =end

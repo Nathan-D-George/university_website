@@ -42,6 +42,16 @@ class EnlistmentsController < ApplicationController
     redirect_to blackboard_path
   end
 
+  def add_lecturer
+    redirect_to blackboard_path, alert: 'ADMINs only!' if Current.user.role != "ADMIN"
+    @subjects = subject_names
+    @users    = lecturers_names
+  end
+
+  def actually_add_lecturer
+    
+  end
+
   private
 
   def only_lecturers_allowed
@@ -64,6 +74,13 @@ class EnlistmentsController < ApplicationController
       names.append(subject.name)
     }
     names
+  end
+
+  def lecturers_names
+    lecturers_names = []
+    lecturers = User.where(role: "lecturer").all
+    lecturers.each {|user| lecturers_names.append(user.email)}
+    lecturers_names
   end
   
   def already_exists?(user_id, subject_id)

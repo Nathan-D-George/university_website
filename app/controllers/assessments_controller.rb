@@ -1,22 +1,21 @@
 class AssessmentsController < ApplicationController
   before_action :assign_temp_subject, only: [:new, :update]
   before_action :ensure_correct_lecturer
+  before_action :assign_assessment, only: [:show, :delete]
   $temp_subject    = nil
   $temp_assessment = nil
   
   def show
-    @assessment = Assessment.find(params[:id])
   end
 
   def new
     @assessment   = Assessment.new
-    $temp_subject = params[:id]
     @users = get_users_per_assessment(params[:id])
     @assessments = get_users_assessments_for_subject(params[:id].to_i)
   end
   
   def create
-    @assessment = Assessment.new#(assessment_params)
+    @assessment = Assessment.new
     @assessment.name  = params[:assessment][:name]
     @assessment.mark  = params[:assessment][:mark]
     @assessment.total = params[:assessment][:total]
@@ -60,14 +59,16 @@ class AssessmentsController < ApplicationController
   end
 
   def delete
-    debugger
-    @assessment = Assessment.find(params[:id])
     @assessment.destroy
     flash[:notice] = 'Successfully Deleted Assessment'
   end
 
   private
 
+  def assign_assessment
+    @assessment = Assessment.find(params[:id])
+  end
+  
   def assessment_params
     params.require(:assessment).permit(:name, :mark, :total, :assess_type)
   end

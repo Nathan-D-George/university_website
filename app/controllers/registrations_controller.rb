@@ -1,4 +1,5 @@
 class RegistrationsController < ApplicationController
+  
   def new
     if !Current.user.nil?
       flash[:alert] = 'You are already logged in'
@@ -53,18 +54,18 @@ class RegistrationsController < ApplicationController
   end
 
   def process_application
-    @user = Current.user
-    @qual = Qualification.where(name: params[:user][:qualification]).first
-    @user.attachments = params[:user][:attachments] if !params[:user][:attachments].nil?
+    user = Current.user
+    qual = Qualification.where(name: params[:user][:qualification]).first
+    params[:user][:attachments] if !params[:user][:attachments].nil?
 
-    params[:user][:residence] == 'none' ? @user.residence = false : @user.residence = true
+    params[:user][:residence] == 'none' ? user.residence = false : user.residence = true
 
     
     bag                  = Bag.new(name:'bag')
-    bag.user_id          = @user.id
-    bag.qualification_id = @qual.id
+    bag.user_id          = user.id
+    bag.qualification_id = qual.id
 
-    if bag.save && @user.save
+    if bag.save && user.save
       flash[:notice] = 'Application successfully submitted'
       redirect_to root_path
     else

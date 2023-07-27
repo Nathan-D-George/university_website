@@ -1,8 +1,9 @@
 class SubjectsController < ApplicationController
   $edit_me = nil
   DateTime.now.month < 7 ? $semester = 1 : $semester = 2
+
   def new
-    if Current.user.role != 1
+    if Current.user.role == "student"
       flash[:alert] = 'This permission is reserved for lecturers'
       redirect_to blackboard_path
     else
@@ -61,17 +62,17 @@ class SubjectsController < ApplicationController
   end
 
   def list
-    @subjects = Subject.all
+    subjects = Subject.all
     @subjects_by_year = []
     years = [1,2,3,4]
 
     years.each{|y|
       oneYear = []
-      @group  = Subject.where(year: y).all
-      @group.each{|g| oneYear.append(g)}
+      group  = Subject.where(year: y).all
+      group.each{|g| oneYear.append(g)}
       @subjects_by_year.append(oneYear)
     }
-    @subjects_by_year
+    @subjects_by_year 
   end
 
   def show
@@ -103,4 +104,5 @@ class SubjectsController < ApplicationController
   def sub_params
     params.require(:subject).permit(:name, :credits, :semester, :year)
   end
+
 end
