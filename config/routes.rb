@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   get    '/blackboard/assessment_edit',   to: 'assessments#edit',   as: 'edit_assessment'
   patch  '/blackboard/assessment_update', to: 'assessments#update', as: 'update_assessment'
   delete '/blackboard/assessment_delete', to: 'assessments#delete', as: 'delete_assessment'
+  get    '/blackboard/assessment_mine',   to: 'assessments#one_students_marks', as: 'my_marks'
 
   get    '/blackboard/enlistment_new',    to: 'enlistments#new',     as: 'new_enlistment'
   post   '/blackboard/enlistment_new',    to: 'enlistments#create',  as: 'create_enlistment'
@@ -74,6 +75,6 @@ end
     tick:: admin must assign lecturers to subjects
 
     USE BRANCHES TO WRITE PROGRAM AND MERGE WITH MAIN AFTERWARDS
-    move long info typed out in views to vars in the controllers
+    tick:: move long info typed out in views to vars in the controllers
 
 =end

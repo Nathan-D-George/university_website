@@ -1,0 +1,27 @@
+<div class='blackboard-page'>
+  <div class='main-panel'>
+    <h3><%= Current.user.student_no %> <%= @subject.name%> Marks</h3>
+    <div class="col-md-8">
+      <table class="table" style="color:white">
+        <thead>
+          <tr>
+            <th scope="col">Assessment</th>
+            <th scope="col">My_Mark</th>
+            <th scope="col">Total</th>
+            <th scope="col">Percent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @assessments.each do |a| %>
+            <tr>
+              <td> <%= a.name %>  </td>
+              <td> <%= a.mark %>  </td>
+              <td> <%= a.total %> </td>
+              <td> <%= a.mark.to_f/a.total*100 %>  </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
