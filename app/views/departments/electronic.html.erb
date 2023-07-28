@@ -7,19 +7,15 @@
   <div class='text-center' style='padding-top:25px; padding-bottom: 50px'>
     <h3>What is Electronic Engineering</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>Electronic Engineering invloves studying electronic principles and components to the lowest level possible. 
-      These skills are used together to build a variety of different products that are used in everyday life; 
-      ranging from the smartwatch to the satelite flying over Earth.</p>
+      <p> <%= @electronic[:info_1] %> </p>
     </div>
     <h3>Is this for you?</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>A love for mathematics, physical science and problem solving will serve as a good starting place. Interest in 
-      how electronic work on their own or in a system could mean that this is just right for you. </p>
+      <p> <%= @electronic[:info_2] %> </p>
     </div>
     <h3>Minimum Requirements</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>A custom VU AP score of 600 is required to be eligible for this course. Use the link below to check your eligibility for 
-      the course according to your most recent marks. </p>
+      <p> <%= @electronic[:info_3] %> </p>
     </div>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
       <%= link_to 'your ap score', ap_score_path %>

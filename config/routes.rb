@@ -6,14 +6,15 @@ Rails.application.routes.draw do
   get '/residences',  to: 'pages#residences'
   get '/calendars',   to: 'pages#calendars'
   get '/alumni',      to: 'pages#alumni'
-  get '/departments', to: 'pages#departments'
-  get '/electronic',  to: 'pages#electronic'
-  get '/mechatronic', to: 'pages#mechatronic'
-  get '/mechanical',  to: 'pages#mechanical'
-  get '/civil',       to: 'pages#civil'
   get '/careers',     to: 'pages#careers'
   get '/ap_score',    to: 'pages#ap_score'
   get 'contact_us',   to: 'pages#contact_us'
+
+  get '/departments', to: 'departments#departments'
+  get '/electronic',  to: 'departments#electronic'
+  get '/mechatronic', to: 'departments#mechatronic'
+  get '/mechanical',  to: 'departments#mechanical'
+  get '/civil',       to: 'departments#civil'
 
   get    '/sign_in',  to: 'sessions#new'
   post   '/sign_in',  to: 'sessions#create'
@@ -48,8 +49,6 @@ Rails.application.routes.draw do
   get    '/blackboard/lessons_edit',   to: 'lessons#edit',   as: 'edit_lesson'
   patch  '/blackboard/lessons_update', to: 'lessons#update', as: 'update_lesson'
 
-  
-
   get    '/blackboard/assessment_new',    to: 'assessments#new',    as: 'new_assessment'
   post   '/blackboard/assessment_new',    to: 'assessments#create', as: 'create_assessment'
   get    '/blackboard/assessment_edit',   to: 'assessments#edit',   as: 'edit_assessment'
@@ -71,16 +70,10 @@ end
     enable a selection process instead of automatic acceptance (should be manual IRL but anyway)
     tick:: table to see only people who are registered for a subject marks
     
-    finalize admin rights
-    admin must assign lecturers to subjects
+    tick:: finalize admin rights
+    tick:: admin must assign lecturers to subjects
 
-  pre-prayer:
-    i surrender (extended version)
-    Yahweh will manifest
-
-  Worship:
-    Praise (Elevation)
-    I speak Jesus (Charity Gayle)
-    Holy Forever (Bethel)
+    USE BRANCHES TO WRITE PROGRAM AND MERGE WITH MAIN AFTERWARDS
+    move long info typed out in views to vars in the controllers
 
 =end

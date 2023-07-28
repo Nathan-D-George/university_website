@@ -5,7 +5,7 @@ class EnlistmentsController < ApplicationController
     are_you_the_real_lecturer(params[:id])
     @enlistment  = Enlistment.new
     @enlistments = students_enlisted(params[:id])
-    @users       = students_only
+    @users       = students_only(params[:id])
     @subjects    = [Subject.find(params[:id].to_i).name]
   end
 
@@ -69,11 +69,12 @@ class EnlistmentsController < ApplicationController
     redirect_to blackboard_path, alert: 'Only Lecturers can do these things.' if Current.user.role == 0 || Current.user.nil?
   end
 
-  def students_only
+  def students_only(subject_id)
+    subject  = Subject.find(subject_id) 
     users    = User.students.all
     students = []
     users.each {|user|
-      students.append(user.email)
+      students.append(user.email) if user.year_of_study >= subject.year
     }
     students
   end

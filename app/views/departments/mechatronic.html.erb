@@ -7,21 +7,15 @@
   <div class='text-center' style='padding-top:25px; padding-bottom: 50px'>
     <h3>What is Mechatronic Engineering</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>Mechatronic Engineering invloves studying electronic and mechanical principles and components to the lowest level 
-      possible. This is complimented with studies in computer sciences to make them a jack of all trades.
-      These skills are used together to build a variety of different products such as robots, assembly lines or automotive 
-      products</p>
+      <p> <%= @mechatronic[:info_1] %>  </p>
     </div>
     <h3>Is this for you?</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>A love for mathematics, physical science and problem solving will serve as a good starting place. Interest in 
-      how electronic components and their mechanical frameworks work on their own or in a system could mean that this 
-      is just right for you. </p>
+      <p> <%= @mechatronic[:info_2] %>  </p>
     </div>
     <h3>Minimum Requirements</h3>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
-      <p>A custom VU AP score of 610 is required to be eligible for this course. Use the link below to check your eligibility for 
-      the course according to your most recent marks. </p>
+      <p> <%= @mechatronic[:info_3] %> </p>
     </div>
     <div style='width: 700px; padding-top:25px; text-align: justify'>
       <%= link_to 'your ap score', ap_score_path %>
