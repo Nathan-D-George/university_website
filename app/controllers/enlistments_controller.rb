@@ -10,9 +10,10 @@ class EnlistmentsController < ApplicationController
   end
 
   def create
+    # debugger
     enlistment = Enlistment.new
-    array = params[:enlistment][:email].split('@')
-    if array.last == "student.com"
+    if params[:email].nil?
+    # if array.last == "student.com"
       enlistment.user_id    = User.where(email: params[:enlistment][:email]).first.id
       enlistment.subject_id = Subject.where(name: params[:enlistment][:subject]).first.id
       enlistment_exists = already_exists?(enlistment.user_id, enlistment.subject_id)
@@ -29,8 +30,8 @@ class EnlistmentsController < ApplicationController
         redirect_to new_assessment_path
       end
     else
-      lecturer = User.where(email: params[:enlistment][:email]).first
-      subject  = Subject.where(name: params[:enlistment][:subject]).first
+      lecturer = User.where(email: params[:email]).first
+      subject  = Subject.where(name: params[:subject]).first
       subject.lecturer = lecturer.student_no
       if subject.save
         flash[:notice] = "Successfully appointed #{lecturer.email} lecturer of #{subject.name}"
@@ -53,7 +54,7 @@ class EnlistmentsController < ApplicationController
     flash[:notice] = 'Successfully destroyed Enrollment'
     redirect_to blackboard_path
   end
-
+ 
   def add_lecturer
     redirect_to blackboard_path, alert: 'ADMINs only!' if Current.user.role != "ADMIN"
     @subjects       = Subject.all
@@ -61,6 +62,17 @@ class EnlistmentsController < ApplicationController
     @users          = lecturers_names
     @users.prepend("unassign")
     # @enlistment     = Enlistment.new
+  end
+
+  def remove_lecturer
+    subject = Subject.find(params[:id].to_i)
+    subject.lecturer =  3023000000
+    if subject.save
+      flash[:notice] = "Unassigned Lecturer from #{subject.name}"
+    else
+      flash[:alert]  = "Something went wrong" 
+    end
+    redirect_to admin_page_path
   end
 
   private

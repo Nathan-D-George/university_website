@@ -32,7 +32,7 @@
         <% else %>
           <td> <p style='color:red'>unassigned</p>  </td>
         <% end %>
-        <td><%= link_to "Edit", '#', class:'btn btn-dark', style:'color:orange; background-color: black'  %></td>
+        <td><%= link_to "Edit", remove_lecturer_path(id: s.id), class:'btn btn-dark', data:{turbo_method: :post}, style:'color:orange; background-color: black'  %></td>
       </tr>
     <% end %>
   <% end %>

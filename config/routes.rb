@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get  '/blackboard',            to: 'blackboard#home'
   get  '/blackboard/secret',     to: 'lessons#secret'
   get  '/blackboard/admin_page', to: 'enlistments#add_lecturer', as: 'admin_page'
-  post '/blackboard/admin_page', to: 'enlistments#actually_add_lecturer'
+  post '/blackboard/admin_page', to: 'enlistments#actually_add_lecturer', as: 'add_lecturer'
+  post '/blackboard/no_lecturer',to: 'enlistments#remove_lecturer',       as: 'remove_lecturer'
 
   resources :subjects, except: [:destroy, :new, :edit]
   get    '/blackboard/subject_new',     to: 'subjects#new',     as: 'new_subject'
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
   get    '/blackboard/assessment_edit',   to: 'assessments#edit',   as: 'edit_assessment'
   patch  '/blackboard/assessment_update', to: 'assessments#update', as: 'update_assessment'
   delete '/blackboard/assessment_delete', to: 'assessments#delete', as: 'delete_assessment'
+  
   get    '/blackboard/assessment_mine',   to: 'assessments#one_students_marks', as: 'my_marks'
 
   get    '/blackboard/enlistment_new',    to: 'enlistments#new',     as: 'new_enlistment'
